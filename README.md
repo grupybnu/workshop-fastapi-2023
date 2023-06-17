@@ -1,5 +1,7 @@
 # Oficina FastAPI GruPy Blumenau 2023
 
+![image](https://github.com/jjpaulo2/oficina-fastapi-grupy-blumenau-2023/assets/22819523/74f8c993-a2f4-47e6-a535-29a8e40ff0c9)
+
 Código-fonte da API RESTful construída na oficina de FastAPI realizada no *GruPy Blumenau* no dia *17/06/2023*.
 
 > [Veja aqui a documentação oficial do FastAPI](https://fastapi.tiangolo.com/).
@@ -64,7 +66,9 @@ Para executar a aplicação, rode o comando abaixo no terminal.
 uvicorn main:app --reload
 ```
 
-Agora, navegue para [http://127.0.0.1:8000](http://127.0.0.1:8000).
+Agora, navegue para [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs).
+
+![image](https://github.com/jjpaulo2/oficina-fastapi-grupy-blumenau-2023/assets/22819523/3fa832d7-f23f-4c9d-ae1a-f66a41e19b7a)
 
 ## O código feito durante a oficina
 
@@ -108,4 +112,6 @@ Agora é só rodar o projeto.
 uvicorn api.app:app --reload
 ```
 
-Agora, é só navegar para [http://127.0.0.1:8000](http://127.0.0.1:8000).
+Agora, é só navegar para [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs).
+
+![image](https://github.com/jjpaulo2/oficina-fastapi-grupy-blumenau-2023/assets/22819523/d373bc63-5be9-415c-948e-448005d2452b)
