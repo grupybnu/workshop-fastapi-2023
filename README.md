@@ -77,7 +77,7 @@ Agora, navegue para [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs).
 O código que fizemos durante a oficina está dentro do módulo [`api`](./api). 
 
 ```
-.
+api
 ├── services
 │   └── carros
 │       ├── listar_carros.py
