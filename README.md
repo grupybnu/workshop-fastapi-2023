@@ -4,7 +4,9 @@
 
 Código-fonte da API RESTful construída na oficina de FastAPI realizada no *GruPy Blumenau* no dia *17/06/2023*.
 
-> [Veja aqui a documentação oficial do FastAPI](https://fastapi.tiangolo.com/).
+### Links interessantes
+- [Documentação oficial do FastAPI](https://fastapi.tiangolo.com/)
+- [Apresentação usada da oficina](https://speakerdeck.com/jjpaulo2/fastapi-na-pratica)
 
 ## Iniciando no FastAPI
 
