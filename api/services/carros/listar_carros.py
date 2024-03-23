@@ -1,27 +1,30 @@
 from structlog.typing import FilteringBoundLogger
 from structlog import get_logger
+from pysondb import PysonDB
 
 
 class ListarCarrosService:
 
-    def __init__(self, quantidade: int | None, logger: FilteringBoundLogger = get_logger()):
+    def __init__(
+        self,
+        quantidade: int | None,
+        db: PysonDB,
+        logger: FilteringBoundLogger = get_logger()
+    ):
         self.quantidade = quantidade
+        self.db = db
         self.logger = logger
 
 
     def run(self) -> list[str]:
-        lista_carros = [
-            'Fiat Uno',
-            'Fiat Pálio',
-            'Fiat Siena'
-        ]
-
-        carros_para_retornar = lista_carros
+        self.logger.info('Obtendo os carros')
 
         if self.quantidade:
-            carros_para_retornar = lista_carros[:self.quantidade]
+            carros = self.db.get_all()[:self.quantidade]
+        else:
+            carros = self.db.get_all()
         
-        self.logger.info('Retornando os carros', carros=carros_para_retornar)
+        self.logger.info('Retornando os carros', carros=carros)
 
-        return carros_para_retornar
+        return carros
     

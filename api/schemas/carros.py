@@ -8,7 +8,7 @@ class CriarCarroSchema(BaseModel):
 
 
 class AtualizarCarroSchema(BaseModel):
-    modelo: str | None
-    marca: str | None
-    ano: int | None
+    modelo: str | None = None
+    marca: str | None = None
+    ano: int | None = None
     

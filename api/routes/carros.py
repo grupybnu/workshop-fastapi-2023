@@ -3,8 +3,9 @@ from typing import Annotated
 from fastapi.routing import APIRouter
 from fastapi import status, Depends
 from structlog.typing import FilteringBoundLogger
+from pysondb import PysonDB
 
-from api.dependencies import get_logger
+from api.dependencies import get_logger, get_db
 from api.schemas.carros import AtualizarCarroSchema, CriarCarroSchema
 from api.schemas.padrao import ErroPadrao, RetornoPadrao
 
@@ -23,27 +24,40 @@ carros_router = APIRouter(
 @carros_router.get("/")
 def list_carros(
     logger: Annotated[FilteringBoundLogger, Depends(get_logger)],
+    db: Annotated[PysonDB, Depends(get_db)],
     quantidade: int | None = None
 ):
-    service = ListarCarrosService(quantidade, logger)
+    service = ListarCarrosService(quantidade, db, logger)
     return service.run()
 
 
 @carros_router.get('/{carro_id}')
-def get_carro(carro_id: int):
-    service = DetalhesCarroService(carro_id)
+def get_carro(
+    carro_id: str,
+    logger: Annotated[FilteringBoundLogger, Depends(get_logger)],
+    db: Annotated[PysonDB, Depends(get_db)]
+):
+    service = DetalhesCarroService(carro_id, db, logger)
     return service.get_carro_completo()
 
 
 @carros_router.get('/{carro_id}/marca')
-def get_marca_carro(carro_id: int):
-    service = DetalhesCarroService(carro_id)
+def get_marca_carro(
+    carro_id: str,
+    logger: Annotated[FilteringBoundLogger, Depends(get_logger)],
+    db: Annotated[PysonDB, Depends(get_db)]
+):
+    service = DetalhesCarroService(carro_id, db, logger)
     return service.get_marca()
 
 
 @carros_router.post('/')
-def cadastrar_carro(input: CriarCarroSchema):
-    service = CadastrarCarroService(input)
+def cadastrar_carro(
+    input: CriarCarroSchema,
+    logger: Annotated[FilteringBoundLogger, Depends(get_logger)],
+    db: Annotated[PysonDB, Depends(get_db)],
+):
+    service = CadastrarCarroService(input, db, logger)
     return service.run()
 
 
@@ -55,6 +69,11 @@ def cadastrar_carro(input: CriarCarroSchema):
         'model': ErroPadrao
     }
 })
-def atualizar_carro(carro_id: int, input: AtualizarCarroSchema):
-    service = AtualizarCarroService(carro_id, input)
+def atualizar_carro(
+    carro_id: str,
+    input: AtualizarCarroSchema,
+    logger: Annotated[FilteringBoundLogger, Depends(get_logger)],
+    db: Annotated[PysonDB, Depends(get_db)]
+):
+    service = AtualizarCarroService(carro_id, input, db, logger)
     return service.run()
