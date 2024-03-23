@@ -1,6 +1,10 @@
-from fastapi.routing import APIRouter
-from fastapi import status
+from typing import Annotated
 
+from fastapi.routing import APIRouter
+from fastapi import status, Depends
+from structlog.typing import FilteringBoundLogger
+
+from api.dependencies import get_logger
 from api.schemas.carros import AtualizarCarroSchema, CriarCarroSchema
 from api.schemas.padrao import ErroPadrao, RetornoPadrao
 
@@ -17,8 +21,11 @@ carros_router = APIRouter(
 
 
 @carros_router.get("/")
-def list_carros(quantidade: int | None = None):
-    service = ListarCarrosService(quantidade)
+def list_carros(
+    logger: Annotated[FilteringBoundLogger, Depends(get_logger)],
+    quantidade: int | None = None
+):
+    service = ListarCarrosService(quantidade, logger)
     return service.run()
 
 
